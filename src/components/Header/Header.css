@@ -1,0 +1,40 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 100px;
+    background-color: #FFFFFF;
+}
+
+.navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    padding: 10px 10px;
+}
+
+.nav-link {
+    font-family: Open Sans, sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    color: black;
+}
+
+.nav-link:hover {
+    color: #E8DDB5;
+    cursor: pointer;
+}
+
+.dark-mode-icon {
+    width: 22px;
+    height: 22px;
+    cursor: pointer;
+}
+
+.dark-mode-icon img {
+    width: 100%;
+    height: 100%;
+    color: #554242;
+}
