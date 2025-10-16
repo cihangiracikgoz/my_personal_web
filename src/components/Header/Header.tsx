@@ -1,12 +1,27 @@
-import { type JSX } from "react";
-import darkModeLogo from "../../assets/logos/dark-mode-icon.png";
+import { useEffect, useState, type JSX } from "react";
+import { MdOutlineDarkMode, MdOutlineLightMode } from "react-icons/md";
 import "./Header.css";
 
 export default function Header(): JSX.Element {
+  const [darkMode, setDarkMode] = useState(false);
+
+  const handleToggle = () => {
+    setDarkMode((prev) => !prev);
+  };
+
+  useEffect(() => {
+    const body = document.body;
+    if (darkMode) {
+      body.classList.add("dark-mode");
+    } else {
+      body.classList.remove("dark-mode");
+    }   
+  }, [darkMode]);
+
   return (
     <header className="header">
-        <Navbar />
-        <DarkModeToggle />
+      <Navbar />
+      <DarkModeToggle darkMode={darkMode} onToggle={handleToggle} />
     </header>
   );
 }
@@ -22,12 +37,10 @@ function Navbar(): JSX.Element {
     );
 }
 
-function DarkModeToggle(): JSX.Element {
+function DarkModeToggle({darkMode, onToggle}: {darkMode: boolean; onToggle: () => void;}): JSX.Element {
   return (
-    <div className="dark-mode-toggle">
-        <img src={darkModeLogo} 
-        alt="Dark Mode Toggle" 
-        className="dark-mode-icon" />
-    </div>
+    <button type="button" className="dark-mode-toggle" onClick={onToggle} aria-label={darkMode ? "Light Mode" : "Dark Mode"}>
+      {darkMode ? <MdOutlineLightMode size={24} /> : <MdOutlineDarkMode size={24} />}
+    </button>
   );
 }
