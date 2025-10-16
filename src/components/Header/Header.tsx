@@ -3,7 +3,10 @@ import { MdOutlineDarkMode, MdOutlineLightMode } from "react-icons/md";
 import "./Header.css";
 
 export default function Header(): JSX.Element {
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(() => {
+    const stored = localStorage.getItem("darkMode");
+    return stored === "true";
+  });
 
   const handleToggle = () => {
     setDarkMode((prev) => !prev);
@@ -15,7 +18,8 @@ export default function Header(): JSX.Element {
       body.classList.add("dark-mode");
     } else {
       body.classList.remove("dark-mode");
-    }   
+    }
+    localStorage.setItem("darkMode", darkMode.toString());
   }, [darkMode]);
 
   return (
@@ -39,7 +43,7 @@ function Navbar(): JSX.Element {
 
 function DarkModeToggle({darkMode, onToggle}: {darkMode: boolean; onToggle: () => void;}): JSX.Element {
   return (
-    <button type="button" className="dark-mode-toggle" onClick={onToggle} aria-label={darkMode ? "Light Mode" : "Dark Mode"}>
+    <button type="button" className="dark-mode-toggle" onClick={onToggle} aria-label={darkMode ? "Toggle light Mode" : "Toggle dark Mode"} aria-pressed={darkMode}>
       {darkMode ? <MdOutlineLightMode size={24} /> : <MdOutlineDarkMode size={24} />}
     </button>
   );

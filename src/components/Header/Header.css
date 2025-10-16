@@ -26,3 +26,10 @@
     color: #E8DDB5;
     cursor: pointer;
 }
+
+.dark-mode-toggle {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+}
