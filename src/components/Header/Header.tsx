@@ -2,10 +2,19 @@ import { useEffect, useState, type JSX } from "react";
 import { MdOutlineDarkMode, MdOutlineLightMode } from "react-icons/md";
 import "./Header.css";
 
+type darkModeProps = {
+  darkMode: boolean;
+  onToggle: () => void;
+};
+
 export default function Header(): JSX.Element {
-  const [darkMode, setDarkMode] = useState(() => {
-    const stored = localStorage.getItem("darkMode");
-    return stored === "true";
+  const [darkMode, setDarkMode] = useState<boolean>(() => {
+    try {
+      const stored = localStorage.getItem("darkMode");
+      return stored === "true";
+    } catch (e) {
+      return false;
+    }
   });
 
   const handleToggle = () => {
@@ -19,7 +28,10 @@ export default function Header(): JSX.Element {
     } else {
       body.classList.remove("dark-mode");
     }
-    localStorage.setItem("darkMode", darkMode.toString());
+
+    try {
+      localStorage.setItem("darkMode", darkMode.toString());
+    } catch (_) {}
   }, [darkMode]);
 
   return (
@@ -36,15 +48,14 @@ function Navbar(): JSX.Element {
         <a className="nav-link">About me</a>
         <a className="nav-link">Journey</a>
         <a className="nav-link">Experiences & Projects</a>
-        <a className="nav-link">Contact</a>
     </nav>
     );
 }
 
-function DarkModeToggle({darkMode, onToggle}: {darkMode: boolean; onToggle: () => void;}): JSX.Element {
+function DarkModeToggle({ darkMode, onToggle }: darkModeProps): JSX.Element {
   return (
     <button type="button" className="dark-mode-toggle" onClick={onToggle} aria-label={darkMode ? "Toggle light Mode" : "Toggle dark Mode"} aria-pressed={darkMode}>
-      {darkMode ? <MdOutlineLightMode size={24} /> : <MdOutlineDarkMode size={24} />}
+      {darkMode ? <MdOutlineLightMode size={26} /> : <MdOutlineDarkMode size={26} />}
     </button>
   );
 }

@@ -1,9 +1,8 @@
 .header {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
-    padding: 10px 100px;
-    background-color: #FFFFFF;
+    padding: 10px;
 }
 
 .navbar {
@@ -15,11 +14,9 @@
 }
 
 .nav-link {
-    font-family: Open Sans, sans-serif;
-    font-size: 15px;
-    font-weight: 600;
+    font-size: 17px;
+    font-weight: regular;
     text-decoration: none;
-    color: black;
 }
 
 .nav-link:hover {
@@ -32,4 +29,5 @@
     border: none;
     cursor: pointer;
     outline: none;
+    color: inherit;
 }
