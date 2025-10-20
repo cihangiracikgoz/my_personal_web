@@ -3,42 +3,73 @@ import { FaInstagram, FaLinkedinIn, } from "react-icons/fa";
 import { FiGithub } from "react-icons/fi";
 import "./Hero.css";
 
+type Icons = {
+    instagram: string;
+    linkedin: string;
+    github: string;
+}
+
+type Profile = {
+    name: string;
+    education: string;
+    picture: {
+        src: string;
+        alt: string;
+    };
+    icons: Icons;
+}
+
+const profile: Profile = {
+    name: "Cihangir Acikgoz",
+    education: "BSc Computer Science at University of Surrey",
+    picture: {
+        src: "",
+        alt: "Professional Profile Picture",
+    },
+    icons: {
+        instagram: "https://www.instagram.com/cihangiracikgoz/",
+        linkedin: "https://www.linkedin.com/in/cihangiracikgoz/",
+        github: "https://github.com/cihangiracikgoz",
+    }
+}
 
 export default function Hero(): JSX.Element {
     return (
-        <section className="hero-section">
+        <section id="home" className="hero-section">
             <div className="hero-box">
                 <img 
                     className="hero-profile-picture" 
-                    src="" 
-                    alt="Professional Profile Picture" 
+                    src={profile.picture.src} 
+                    alt={profile.picture.alt}
+                    decoding="async"
+                    loading="lazy"
                 />
-                <HeroContent />
+                <HeroContent profile={profile}/>
             </div>
         </section>
     );
 }
 
-function HeroContent(): JSX.Element {
+function HeroContent({profile}: {profile: Profile}): JSX.Element {
     return (
         <div className="hero-content">
-            <h1 className="hero-name">Cihangir Acikgoz</h1>
-            <p className="hero-school">BSc Computer Science at University of Surrey</p>
-            <HeroSocialIcons />
+            <h1 className="hero-name">{profile.name}</h1>
+            <p className="hero-education">{profile.education}</p>
+            <HeroSocialIcons icons={profile.icons}/>
         </div>
     );
 }
 
-function HeroSocialIcons(): JSX.Element {
+function HeroSocialIcons({icons}: {icons: Icons}): JSX.Element {
     return (
         <div className="hero-social-icons">
-            <a href="https://www.instagram.com/cihangiracikgoz/" target="_blank" rel="noopener noreferrer" className="hero-icon-link">
+            <a href={icons.instagram} target="_blank" rel="noopener noreferrer" className="hero-icon-link">
                 <FaInstagram className="hero-icon" />
             </a>
-            <a href="https://www.linkedin.com/in/cihangiracikgoz/" target="_blank" rel="noopener noreferrer" className="hero-icon-link">
+            <a href={icons.linkedin} target="_blank" rel="noopener noreferrer" className="hero-icon-link">
                 <FaLinkedinIn className="hero-icon" />
             </a>
-            <a href="https://github.com/cihangiracikgoz" target="_blank" rel="noopener noreferrer" className="hero-icon-link">
+            <a href={icons.github} target="_blank" rel="noopener noreferrer" className="hero-icon-link">
                 <FiGithub className="hero-icon" />
             </a>
         </div>

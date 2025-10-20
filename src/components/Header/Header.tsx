@@ -45,7 +45,7 @@ export default function Header(): JSX.Element {
 function Navbar(): JSX.Element {
   return (
     <nav className="navbar">
-        <a className="nav-link">About me</a>
+        <a href="#home" className="nav-link">Home</a>
         <a className="nav-link">Journey</a>
         <a className="nav-link">Experiences & Projects</a>
     </nav>

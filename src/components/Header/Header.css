@@ -15,8 +15,16 @@
 
 .nav-link {
     font-size: 17px;
-    font-weight: regular;
+    font-weight: 400;
     text-decoration: none;
+    outline: none;
+    color: inherit;
+}
+
+.nav-link:focus,
+.nav-link:active {
+    outline: none;
+    color: inherit;
 }
 
 .nav-link:hover {

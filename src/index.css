@@ -1,3 +1,7 @@
+html {
+    scroll-behavior: smooth;
+}   
+
 * {
     margin: 0;
     padding: 0;
@@ -18,14 +22,8 @@ body:not(.site-loaded) > * {
 }
 
 body.site-loaded > * {
-    animation: slideFade 0.9s cubic-bezier(.2,.8,.2,1) forwards;
+    animation: slideFade 1s cubic-bezier(.2,.8,.2,1) forwards;
 }
-
-body.site-loaded > *:nth-child(1) { animation-delay: 0.05s; }
-body.site-loaded > *:nth-child(2) { animation-delay: 0.15s; }
-body.site-loaded > *:nth-child(3) { animation-delay: 0.30s; }
-body.site-loaded > *:nth-child(4) { animation-delay: 0.45s; }
-body.site-loaded > *:nth-child(5) { animation-delay: 0.60s; }
 
 @keyframes slideFade {
     from {
