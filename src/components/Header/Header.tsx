@@ -46,8 +46,8 @@ function Navbar(): JSX.Element {
   return (
     <nav className="navbar">
         <a href="#home" className="nav-link">Home</a>
-        <a className="nav-link">Journey</a>
-        <a className="nav-link">Experiences & Projects</a>
+        <a href="#journey" className="nav-link">Journey</a>
+        <a href="#experiences-and-projects" className="nav-link">Experiences & Projects</a>
     </nav>
     );
 }
