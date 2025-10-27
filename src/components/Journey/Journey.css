@@ -1,0 +1,57 @@
+.journey-section {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.journey-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    margin-right: 200px;
+}
+
+.journey-icon {
+    width: 100px;
+    height: 100px;
+}
+
+.journey-title {
+    font-size: 40px;
+    font-weight: 500;
+    letter-spacing: -2px;
+}
+
+.timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 100px;
+    border-left: 5px solid currentColor;
+    padding: 25px;
+}
+
+.timeline-event {
+    display: flex;
+    align-items: center;
+    gap: 100px;
+}
+
+.timeline-year {
+    font-size: 40px;
+    font-weight: 600;
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.timeline-description {
+    font-size: 20px;
+    font-weight: 500;
+    width: 600px;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
