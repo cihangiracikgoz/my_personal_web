@@ -1,5 +1,5 @@
 import { type JSX } from "react";
-import { type experiences, experiencesData } from "../../../data/experience";
+import { type Experiences, experiencesData } from "../../../data/experience";
 import "./Experience.css";
 
 export default function Experience(): JSX.Element {
@@ -15,13 +15,13 @@ export default function Experience(): JSX.Element {
     );  
 }
 
-function ExperienceCard(exp: experiences): JSX.Element {
+export function ExperienceCard(props: Experiences): JSX.Element {
     return (
         <div className="experience-card">
-            <p>{exp.role}</p>
-            <p>{exp.company}</p>
-            <p>{exp.location}</p>
-            <p>{exp.duration}</p>
+            <p className="experience-role">{props.role}</p>
+            <p className="experience-company">{props.company}</p>
+            <p className="experience-location">{props.location}</p>
+            <p className="experience-duration">{props.duration}</p>
         </div>
     );
 }

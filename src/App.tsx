@@ -2,6 +2,7 @@ import { useEffect, type JSX } from "react";
 import Header from "./components/Header/Header.tsx";
 import Hero from "./components/Hero/Hero.tsx";
 import Journey from "./components/Journey/Journey.tsx";
+import ExpAndProject from "./components/ExpAndProject/ExpAndProject.tsx";
 
 export default function App(): JSX.Element {
   useEffect(() => {
@@ -17,6 +18,7 @@ export default function App(): JSX.Element {
       <Header />
       <Hero />
       <Journey />
+      <ExpAndProject />
     </>
   );
 }

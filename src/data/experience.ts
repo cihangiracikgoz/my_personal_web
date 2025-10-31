@@ -1,11 +1,11 @@
-type experiences = {
+export type Experiences = {
     company: string;
     role: string;
     location: string;
     duration: string;
 }
 
-export const experiencesData: experiences[] = [
+export const experiencesData: Experiences[] = [
     {
         company: "CYDEO",
         role: "Software Development Engineer in Test",

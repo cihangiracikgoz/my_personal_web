@@ -1,9 +1,9 @@
-type projects = {
+export type Projects = {
     title: string;
     description: string;
 }
 
-export const projectsData: projects[] = [
+export const projectsData: Projects[] = [
     {
         title: "Morse Decoder using Raspberry Pi",
         description: "Me and my team developed a Morse code decoder using a Raspberry Pi Pico, implementing precise button input timing to distinguish dots and dashes, and displaying decoded letters on a 7-segment display. Integrated a buzzer and RGB LED for real-time audio-visual feedback, and used a potentiometer to adjust input time limits. Applied concepts of digital logic design, GPIO interfacing and embedded C programming."
