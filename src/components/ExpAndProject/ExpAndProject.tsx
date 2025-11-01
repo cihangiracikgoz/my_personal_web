@@ -1,6 +1,7 @@
 import { type JSX } from "react";
 import Experience from "./Experience/Experience";
 import Project from "./Project/Project";
+import "./ExpAndProject.css";
 
 export default function ExpAndProject(): JSX.Element {
   return (  

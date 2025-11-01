@@ -1,0 +1,45 @@
+.experience-container {
+    padding: 0px 300px 150px 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.experience-header-container {
+    display: flex;
+    align-items: center;
+}
+
+.experience-header {
+    font-size: 40px;
+    font-weight: 700;
+    letter-spacing: -1px;
+}
+
+.experience-card {
+    display: flex;
+    flex-direction: column;
+    padding-top: 50px;
+    gap: 5px;
+}
+
+.experience-role {
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.experience-company {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.experience-location {
+    font-size: 17px;
+    font-weight: 400;
+}
+
+.experience-duration {
+    font-size: 17px;
+    font-weight: 400;
+    font-style: italic;
+}

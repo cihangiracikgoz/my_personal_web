@@ -5,7 +5,7 @@ import "./Experience.css";
 export default function Experience(): JSX.Element {
     return (
         <div className="experience-container">
-            <div>
+            <div className="experience-header-container">
                 <h2 className="experience-header">Experiences</h2>
             </div>
             {experiencesData.map((exp, index) => (
