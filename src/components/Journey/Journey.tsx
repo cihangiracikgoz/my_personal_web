@@ -15,7 +15,7 @@ export default function Journey(): JSX.Element {
     );
 }
 
-function Timeline(): JSX.Element {
+export function Timeline(): JSX.Element {
     return (
         <div className="timeline">
             {timelineEvents.map((event, index) => (

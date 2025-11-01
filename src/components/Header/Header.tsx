@@ -42,7 +42,7 @@ export default function Header(): JSX.Element {
   );
 }
 
-function Navbar(): JSX.Element {
+export function Navbar(): JSX.Element {
   return (
     <nav className="navbar">
         <a href="#home" className="nav-link">Home</a>
@@ -52,7 +52,7 @@ function Navbar(): JSX.Element {
     );
 }
 
-function DarkModeToggle({ darkMode, onToggle }: darkModeProps): JSX.Element {
+export function DarkModeToggle({ darkMode, onToggle }: darkModeProps): JSX.Element {
   return (
     <button type="button" className="dark-mode-toggle" onClick={onToggle} aria-label={darkMode ? "Toggle light Mode" : "Toggle dark Mode"} aria-pressed={darkMode}>
       {darkMode ? <MdOutlineLightMode size={26} /> : <MdOutlineDarkMode size={26} />}

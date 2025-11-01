@@ -21,7 +21,7 @@ export default function Hero(): JSX.Element {
     );
 }
 
-function HeroContent({profile}: {profile: Profile}): JSX.Element {
+export function HeroContent({profile}: {profile: Profile}): JSX.Element {
     return (
         <div className="hero-content">
             <h1 className="hero-name">{profile.name}</h1>
@@ -31,7 +31,7 @@ function HeroContent({profile}: {profile: Profile}): JSX.Element {
     );
 }
 
-function HeroSocialIcons({icons}: {icons: Icons}): JSX.Element {
+export function HeroSocialIcons({icons}: {icons: Icons}): JSX.Element {
     return (
         <div className="hero-social-icons">
             <a href={icons.instagram} target="_blank" rel="noopener noreferrer" className="hero-icon-link">
