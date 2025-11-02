@@ -5,6 +5,10 @@ export type Experiences = {
     duration: string;
 }
 
+export type ExperienceCardProps = Experiences & {
+    index: number;
+}
+
 export const experiencesData: Experiences[] = [
     {
         company: "CYDEO",
