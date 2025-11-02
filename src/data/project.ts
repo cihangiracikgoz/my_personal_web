@@ -3,6 +3,10 @@ export type Projects = {
     description: string;
 }
 
+export type ProjectCardProps = Projects & {
+    index: number;
+}
+
 export const projectsData: Projects[] = [
     {
         title: "Morse Decoder using Raspberry Pi",
