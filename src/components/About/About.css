@@ -1,0 +1,51 @@
+.about {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 60px;
+    padding: 80px 100px;
+}
+
+.photo-placeholder {
+    width: 400px;
+    height: 500px;
+    background: var(--accent);
+    opacity: 0.3;
+}
+
+.about-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.about-name {
+    font-size: 70px;
+    font-weight: 400;
+    color: var(--text-primary);
+    letter-spacing: -4px;
+    line-height: 1.0;
+}
+
+.about-edu {
+    font-size: 25px;
+    color: var(--text-primary);
+    margin-top: 20px;
+    letter-spacing: -1px;
+}
+
+.about-socials {
+    display: flex;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.about-socials a {
+    color: var(--text-primary);
+    font-size: 40px;
+    transition: color 0.3s ease;
+}
+
+.about-socials a:hover {
+    color: var(--accent);
+}

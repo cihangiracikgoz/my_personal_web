@@ -15,16 +15,23 @@ export default function Header() {
         }
     }
 
+    function scrollTo(id: string) {
+        return (e: React.MouseEvent) => {
+            e.preventDefault();
+            document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+
     return (
         <header className="header">
             <nav className='navbar'>
-                <a className='nav-link' href='#about'>About Me</a>
-                <a className='nav-link' href='#journey'>Journey</a>
-                <a className='nav-link' href='#projects'>Projects</a>
+                <a className='nav-link' href='#about' onClick={scrollTo('about')}>About Me</a>
+                <a className='nav-link' href='#journey' onClick={scrollTo('journey')}>Journey</a>
+                <a className='nav-link' href='#projects' onClick={scrollTo('projects')}>Projects</a>
             </nav>
             <button className='dark-mode-toggle' onClick={toggleDarkMode}>
                 {isDarkMode ? <FiSun /> : <FiMoon />}
             </button>
         </header>
-    )
+    );
 }
