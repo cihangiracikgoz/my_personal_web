@@ -1,3 +1,18 @@
+:root {
+    --bg-primary: #E0E1DD;
+    --text-primary: #1B263B;
+    --accent: #345490;
+    --journey-line: #1B263B;
+}
+
+:root[data-theme="dark"] {
+    --bg-primary: #0D1B2A;
+    --bg-gradient: linear-gradient(270deg, #1B263B 0%, #3C1E96 100%);
+    --text-primary: #E0E1DD;
+    --accent: #345490;
+    --journey-line: #E0E1DD;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -5,5 +20,8 @@
 }
 
 body {
-    background-color: #E8DDB5;
+    min-height: 100vh;
+    background: var(--bg-gradient, var(--bg-primary));
+    color: var(--text-primary);
+    transition: background 0.3s ease, color 0.3s ease;
 }

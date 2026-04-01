@@ -1,10 +1,10 @@
-import Header from "./components/Header/Header.tsx";
+import Header from "./components/Header/Header";
 
 export default function App() {
 
   return (
     <>
-      <Header/>
+      <Header></Header>
     </>
   )
 }

@@ -1,33 +1,30 @@
-import { type JSX } from "react";
-import darkModeLogo from "../../assets/logos/dark-mode-icon.png";
-import "./Header.css";
+import { useState } from 'react';
+import './Header.css';
+import { FiMoon, FiSun } from 'react-icons/fi';
 
-export default function Header(): JSX.Element {
-  return (
-    <header className="header">
-        <Navbar />
-        <DarkModeToggle />
-    </header>
-  );
-}
+export default function Header() {
+    const [isDarkMode, setIsDarkMode] = useState(false);
 
-function Navbar(): JSX.Element {
-  return (
-    <nav className="navbar">
-        <a className="nav-link">About me</a>
-        <a className="nav-link">Journey</a>
-        <a className="nav-link">Experiences & Projects</a>
-        <a className="nav-link">Contact</a>
-    </nav>
-    );
-}
+    function toggleDarkMode() {
+        const newMode = !isDarkMode;
+        setIsDarkMode(newMode);
+        if (newMode) {
+            document.documentElement.setAttribute('data-theme', 'dark');
+        } else {
+            document.documentElement.removeAttribute('data-theme');
+        }
+    }
 
-function DarkModeToggle(): JSX.Element {
-  return (
-    <div className="dark-mode-toggle">
-        <img src={darkModeLogo} 
-        alt="Dark Mode Toggle" 
-        className="dark-mode-icon" />
-    </div>
-  );
+    return (
+        <header className="header">
+            <nav className='navbar'>
+                <a className='nav-link' href='#about'>About Me</a>
+                <a className='nav-link' href='#journey'>Journey</a>
+                <a className='nav-link' href='#projects'>Projects</a>
+            </nav>
+            <button className='dark-mode-toggle' onClick={toggleDarkMode}>
+                {isDarkMode ? <FiSun /> : <FiMoon />}
+            </button>
+        </header>
+    )
 }
