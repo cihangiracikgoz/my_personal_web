@@ -1,6 +1,38 @@
+"use client"
+
 import { FiGithub, FiLinkedin, FiInstagram } from "react-icons/fi";
+import { BiDonateHeart } from "react-icons/bi";
+import { Popover, PopoverButton, PopoverPanel } from "@headlessui/react";
+import { useState } from "react";
 
 export default function About() {
+  const [isLoading, setIsLoading] = useState(false);
+
+  async function handleDonate(amount: number) {
+    setIsLoading(true);
+
+    try { 
+      const res = await fetch("/api/checkout_sessions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ amount }),
+      });
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || "Payment processing failed");
+      }
+      
+      window.location.href = data.url;
+    } catch (error) {
+      console.error("Error occurred while processing donation:", error);
+    } finally {
+      setIsLoading(false);
+    }
+}
+
   return (
     <section
       id="about"
@@ -44,6 +76,25 @@ export default function About() {
           >
             <FiGithub />
           </a>
+          <Popover className="relative">
+            <PopoverButton
+              className="text-[var(--text-primary)] text-[40px] transition-colors duration-300 hover:text-[var(--accent)]"
+            >
+              <BiDonateHeart />
+            </PopoverButton>
+            <PopoverPanel className="absolute left-1/2 -translate-x-1/2 mt-3 flex gap-2 rounded-lg bg-[var(--bg-primary)] p-3 shadow-lg border border-[var(--accent)]/20">
+              {[5, 10, 20, 50].map((amount) => (
+                <button
+                  key={amount}
+                  disabled={isLoading}
+                  onClick={() => handleDonate(amount)}
+                  className="rounded-md bg-[var(--accent)]/10 px-4 py-2 text-sm font-medium text-[var(--text-primary)] transition-colors duration-200 hover:bg-[var(--accent)] hover:text-[var(--bg-primary)] disabled:cursor-not-allowed disabled:opacity-50"
+                >
+                  £{amount}
+                </button>
+              ))}
+            </PopoverPanel>
+          </Popover>
         </div>
       </div>
     </section>
