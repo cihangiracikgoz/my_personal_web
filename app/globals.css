@@ -8,14 +8,22 @@
     --text-primary: #1B263B;
     --accent: #1B1B1B;
     --journey-line: #1B263B;
+    --text-secondary: rgba(27, 38, 59, 0.6);
+    --input-bg: rgba(27, 38, 59, 0.06);
+    --input-border: rgba(27, 38, 59, 0.2);
+    --input-placeholder: rgba(27, 38, 59, 0.4);
   }
 
   :root[data-theme="dark"] {
     --bg-primary: #0D1B2A;
-    --bg-gradient: linear-gradient(270deg, #1B263B 0%, #3C1E96 100%);
+    --bg-gradient: linear-gradient(270deg, #0A0F1A 0%, #1B263B 100%);
     --text-primary: #E0E1DD;
     --accent: #E0E1DD;
     --journey-line: #E0E1DD;
+    --text-secondary: rgba(224, 225, 221, 0.6);
+    --input-bg: rgba(224, 225, 221, 0.06);
+    --input-border: rgba(224, 225, 221, 0.2);
+    --input-placeholder: rgba(224, 225, 221, 0.4);
   }
 
   html {

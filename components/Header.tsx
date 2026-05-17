@@ -17,8 +17,7 @@ export default function Header() {
   }
 
   function scrollTo(id: string) {
-    return (e: React.MouseEvent) => {
-      e.preventDefault();
+    return () => {
       document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
     };
   }
@@ -26,27 +25,30 @@ export default function Header() {
   return (
     <header className="flex justify-between items-center py-5 px-[100px]">
       <nav className="flex items-center gap-[50px]">
-        <a
-          className="text-lg font-normal text-[var(--text-primary)] no-underline hover:text-[var(--accent)] hover:cursor-pointer"
-          href="#about"
+        <button
+          className="text-lg font-normal text-[var(--text-primary)] hover:text-[var(--accent)] cursor-pointer bg-transparent border-none"
           onClick={scrollTo("about")}
         >
           About Me
-        </a>
-        <a
-          className="text-lg font-normal text-[var(--text-primary)] no-underline hover:text-[var(--accent)] hover:cursor-pointer"
-          href="#journey"
+        </button>
+        <button
+          className="text-lg font-normal text-[var(--text-primary)] hover:text-[var(--accent)] cursor-pointer bg-transparent border-none"
           onClick={scrollTo("journey")}
         >
           Journey
-        </a>
-        <a
-          className="text-lg font-normal text-[var(--text-primary)] no-underline hover:text-[var(--accent)] hover:cursor-pointer"
-          href="#projects"
+        </button>
+        <button
+          className="text-lg font-normal text-[var(--text-primary)] hover:text-[var(--accent)] cursor-pointer bg-transparent border-none"
           onClick={scrollTo("projects")}
         >
           Projects
-        </a>
+        </button>
+        <button
+          className="text-lg font-normal text-[var(--text-primary)] hover:text-[var(--accent)] cursor-pointer bg-transparent border-none"
+          onClick={scrollTo("contact")}
+        >
+          Contact Me
+        </button>
       </nav>
       <button
         className="bg-transparent border-none text-[var(--text-primary)] text-[22px] cursor-pointer flex items-center"

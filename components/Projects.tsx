@@ -2,22 +2,22 @@ const projects = [
   {
     title: "Morse Decoder using Raspberry Pi",
     description:
-      "Me and my team developed a Morse code decoder using a Raspberry Pi, implementing precise button input timing to distinguish dots and dashes, and displaying decoded letters on a 7-segment display. Integrated a buzzer and RGB LED for real-time audio-visual feedback, and used a potentiometer to adjust input time limits. Applied concepts of digital logic design, GPIO interfacing and embedded C programming.",
+      "My team and I turned a Raspberry Pi into a Morse code decoder. You tap a button and it figures out your dots and dashes, showing letters on a 7-segment display with buzzer and LED feedback. A fun dive into embedded C, GPIO, and digital logic.",
   },
   {
     title: "Dottify",
     description:
-      "Developed a full-stack Django web application for a music-streaming platform used by artists, customers, and admins. Designed a relational data model for albums, songs, playlists, ratings, and comments using ORM techniques. Implemented secure authentication and role-based authorization, enabling subscription access and admin controls. Built a RESTful API alongside server-rendered HTML views using templating.",
+      "A music-streaming platform where artists upload tracks & customers build playlists & leave ratings and admins keep it all running. Built with Django, RESTful API, and role-based auth to keep everyone in their lane.",
   },
   {
     title: "Masked Warrior",
     description:
-      "Co-developed a 2-day action-adventure game prototype in Godot Engine using GDScript, centred on a warrior traversing hostile environments to save a princess. Designed and implemented core gameplay mechanics, including enemy encounters, combat flow, and level progression under strict time constraints. Collaborated on game design, asset integration, and narrative pacing as part of a rapid, multidisciplinary game jam team.",
+      "A 2-day game jam project built in Godot. An action-adventure where a warrior fights through enemies to save the princess. My team and I designed combat, level progression, and narrative pacing under a tight deadline which made every decision count.",
   },
   {
     title: "Computer Vision Gesture Classifier",
     description:
-      "Built a real-time gesture recognition system in Python using MediaPipe and OpenCV to detect and classify anime-inspired hand and body poses from a live webcam feed. Designed and trained a Random Forest classifier (scikit-learn) on custom pose landmark data, achieving multi-class gesture prediction.",
+      "Point your webcam and strike a Jujutsu Kaisen character pose, this system recognises it in real time. Built with Python, MediaPipe, and OpenCV for tracking with a Random Forest classifier trained on custom landmark data to predict gestures.",
   },
 ];
 
@@ -25,19 +25,21 @@ export default function Projects() {
   return (
     <section
       id="projects"
-      className="py-20 px-[100px] min-h-screen text-[var(--text-primary)]"
+      className="flex flex-row justify-center items-center py-20 px-[100px] gap-[100px] min-h-screen text-[var(--text-primary)]"
     >
-      <h2 className="text-[30px] font-medium">Projects</h2>
-      <div className="mt-10 grid grid-cols-2 gap-10">
+      <div className="flex justify-center items-center">
+        <h2 className="text-[30px] font-medium whitespace-nowrap">Projects</h2>
+      </div>
+      <div className="flex flex-col gap-4 self-center max-w-[550px]">
         {projects.map((project, index) => (
           <div
             key={index}
-            className="rounded-lg overflow-hidden bg-[var(--accent)]/10 hover:-translate-y-1 hover:shadow-lg hover:shadow-[var(--accent)]/20 transition-all duration-300"
+            className="flex flex-row rounded-lg overflow-hidden bg-[var(--input-bg)] hover:-translate-y-1 hover:shadow-lg transition-all duration-300"
           >
-            <div className="h-[3px] bg-[var(--accent)]" />
-            <div className="p-8">
-              <h3 className="text-xl font-semibold">{project.title}</h3>
-              <p className="text-[15px] mt-3 leading-relaxed">
+            <div className="w-[3px] bg-[var(--accent)] shrink-0" />
+            <div className="px-5 py-4">
+              <h3 className="text-[15px] font-semibold">{project.title}</h3>
+              <p className="text-[13px] mt-1.5 leading-snug text-[var(--text-secondary)]">
                 {project.description}
               </p>
             </div>
