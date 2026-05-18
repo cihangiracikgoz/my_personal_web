@@ -25,7 +25,7 @@ export default function Projects() {
   return (
     <section
       id="projects"
-      className="flex flex-row justify-center items-center py-20 px-[100px] gap-[100px] min-h-screen text-[var(--text-primary)]"
+      className="flex flex-row justify-center items-center py-20 px-[100px] gap-[100px] min-h-screen text-[var(--foreground)]"
     >
       <div className="flex justify-center items-center">
         <h2 className="text-[30px] font-medium whitespace-nowrap">Projects</h2>
@@ -34,12 +34,12 @@ export default function Projects() {
         {projects.map((project, index) => (
           <div
             key={index}
-            className="flex flex-row rounded-lg overflow-hidden bg-[var(--input-bg)] hover:-translate-y-1 hover:shadow-lg transition-all duration-300"
+            className="flex flex-row rounded-lg overflow-hidden bg-[var(--muted)] hover:-translate-y-1 hover:shadow-lg transition-all duration-300"
           >
             <div className="w-[3px] bg-[var(--accent)] shrink-0" />
             <div className="px-5 py-4">
               <h3 className="text-[15px] font-semibold">{project.title}</h3>
-              <p className="text-[13px] mt-1.5 leading-snug text-[var(--text-secondary)]">
+              <p className="text-[13px] mt-1.5 leading-snug text-[var(--muted-foreground)]">
                 {project.description}
               </p>
             </div>

@@ -32,17 +32,17 @@ export default function Journey() {
       className="flex flex-row justify-center py-20 px-[100px] gap-[100px] min-h-screen"
     >
       <div className="flex justify-center items-center">
-        <h2 className="text-[30px] font-medium text-[var(--text-primary)] whitespace-nowrap">
+        <h2 className="text-[30px] font-medium text-[var(--foreground)] whitespace-nowrap">
           My Journey
         </h2>
       </div>
-      <div className="flex flex-col border-l-[3px] border-[var(--journey-line)] gap-[50px] self-center">
+      <div className="flex flex-col border-l-[3px] border-[var(--foreground)] gap-[50px] self-center">
         {milestones.map((m) => (
           <div key={m.year} className="flex items-center gap-10 pl-[50px]">
-            <div className="text-[25px] font-semibold text-[var(--text-primary)] min-w-[80px]">
+            <div className="text-[25px] font-semibold text-[var(--foreground)] min-w-[80px]">
               {m.year}
             </div>
-            <p className="text-[15px] text-[var(--text-primary)] pl-5 max-w-[400px]">
+            <p className="text-[15px] text-[var(--foreground)] pl-5 max-w-[400px]">
               {m.event}
             </p>
           </div>
