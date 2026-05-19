@@ -1,36 +1,39 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
+import { Turnstile, type TurnstileInstance } from '@marsidev/react-turnstile';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
+import { contactFormSchema } from '@/lib/validations';
 
-const formSchema = z.object({
-  firstName: z.string().nonempty('First name is required'),
-  lastName: z.string().nonempty('Last name is required'),
-  email: z.string().email('Please enter a valid email address'),
-  message: z.string().nonempty('Message is required'),
-})
-
-type ContactForm = z.infer<typeof formSchema>;
+type ContactForm = z.infer<typeof contactFormSchema>;
 
 export default function Contact() {
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'failure'>('idle');
+  const turnstileRef = useRef<TurnstileInstance>(null);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
   const { register, handleSubmit, reset, formState: { errors } } = useForm<ContactForm>({
-    resolver: zodResolver(formSchema)
+    resolver: zodResolver(contactFormSchema)
   });
 
   async function onSubmit(data: ContactForm) {
+    if (!turnstileToken) {
+      setStatus('failure');
+      console.error('Turnstile not initialized');
+      return;
+    }
+    
     setStatus('loading');
     try {
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ ...data, turnstileToken }),
       });
 
       if (!res.ok) {
@@ -39,6 +42,7 @@ export default function Contact() {
       }
       setStatus('success');
       reset();
+      turnstileRef.current?.reset();
     } catch (err) {
       setStatus('failure');
       console.error(err instanceof Error ? err.message : 'Unknown error');
@@ -117,9 +121,14 @@ export default function Contact() {
             />
             {errors.message && <p className="text-xs text-red-500">{errors.message.message}</p>}
           </div>
+          <Turnstile
+            ref={turnstileRef}
+            siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!}
+            onSuccess={setTurnstileToken}
+          />
           <Button
             type="submit"
-            disabled={status === 'loading'}
+            disabled={status === 'loading' || !turnstileToken}
             size="lg"
             className="self-start px-8"
           >
