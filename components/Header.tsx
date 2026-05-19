@@ -51,8 +51,9 @@ export default function Header() {
         </button>
       </nav>
       <button
-        className="bg-transparent border-none text-[var(--foreground)] text-[22px] cursor-pointer flex items-center"
+        className="bg-transparent border-none text-[var(--foreground)] text-[22px] cursor-pointer flex items-center p-2"
         onClick={toggleDarkMode}
+        aria-label={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
       >
         {isDarkMode ? <FiSun /> : <FiMoon />}
       </button>

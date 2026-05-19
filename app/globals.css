@@ -12,7 +12,7 @@
     --secondary: rgba(27, 38, 59, 0.06);
     --secondary-foreground: #1B263B;
     --muted: rgba(27, 38, 59, 0.06);
-    --muted-foreground: rgba(27, 38, 59, 0.6);
+    --muted-foreground: rgba(27, 38, 59, 0.7);
     --destructive: #dc2626;
     --border: rgba(27, 38, 59, 0.2);
     --input: rgba(27, 38, 59, 0.2);
@@ -30,7 +30,7 @@
     --secondary: rgba(224, 225, 221, 0.06);
     --secondary-foreground: #E0E1DD;
     --muted: rgba(224, 225, 221, 0.06);
-    --muted-foreground: rgba(224, 225, 221, 0.6);
+    --muted-foreground: rgba(224, 225, 221, 0.7);
     --destructive: #ef4444;
     --border: rgba(224, 225, 221, 0.2);
     --input: rgba(224, 225, 221, 0.2);

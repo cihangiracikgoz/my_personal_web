@@ -25,6 +25,7 @@ export default function About() {
             href="https://www.instagram.com/cihangiracikgoz"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Instagram"
             className="text-[var(--foreground)] text-[40px] transition-colors duration-300 hover:text-[var(--accent)]"
           >
             <FiInstagram />
@@ -33,6 +34,7 @@ export default function About() {
             href="https://www.linkedin.com/in/cihangiracikgoz/"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="LinkedIn"
             className="text-[var(--foreground)] text-[40px] transition-colors duration-300 hover:text-[var(--accent)]"
           >
             <FiLinkedin />
@@ -41,6 +43,7 @@ export default function About() {
             href="https://github.com/cihangiracikgoz"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="GitHub"
             className="text-[var(--foreground)] text-[40px] transition-colors duration-300 hover:text-[var(--accent)]"
           >
             <FiGithub />
@@ -49,6 +52,7 @@ export default function About() {
             href="https://buymeacoffee.com/cihangiracikgoz"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Buy Me a Coffee"
             className="text-[var(--foreground)] text-[40px] transition-colors duration-300 hover:text-[var(--accent)]"
           >
             <BiCoffeeTogo />

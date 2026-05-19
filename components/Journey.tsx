@@ -41,7 +41,7 @@ export default function Journey() {
           My Journey
         </h2>
       </div>
-      <Accordion defaultValue={[0]} className="flex max-w-[600px] w-full flex-col gap-7">
+      <Accordion className="flex max-w-[600px] w-full flex-col gap-7">
         {milestones.map((m, index) => (
           <AccordionItem
             key={m.year}
