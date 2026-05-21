@@ -1,45 +1,57 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
+import { ZodError } from "zod";
 import EmailTemplate from "@/components/EmailTemplate";
-import { rateLimit } from "@/lib/ratelimit";
+import { ipRateLimit, emailRateLimit } from "@/lib/ratelimit";
 import { validateTurnstile } from "@/lib/turnstile";
 import { contactFormSchema } from "@/lib/validations";
+import { env } from "@/lib/env";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = new Resend(env.RESEND_API_KEY);
 
 const allowedOrigins = new Set([
-    process.env.NEXT_PUBLIC_BASE_URL,
-    "http://localhost:3000",
+    env.NEXT_PUBLIC_BASE_URL,
 ]);
 
 export async function POST(request: Request) {
     try {
+        // CORS check
         const origin = request.headers.get("origin");
         if (!origin || !allowedOrigins.has(origin)) {
             return NextResponse.json({ error: "Origin not allowed" }, { status: 403 });
         }
 
+        // Rate limiting
         const ip = request.headers.get("x-forwarded-for") ?? request.headers.get("CF-Connecting-IP") ?? "unknown";
-        const { success } = await rateLimit.limit(ip);
+        const { success } = await ipRateLimit.limit(ip);
         if (!success) {
             return NextResponse.json({ error: "Too many requests" }, { status: 429 });
         }
         
+        // Honeypot check
         const body = await request.json();
         if (body.website) {
             return NextResponse.json({ success: true });
         }
 
+        // Turnstile verification
         const turnstile = await validateTurnstile(body.turnstileToken ?? "", ip);
         if (!turnstile.success) {
             return NextResponse.json({ error: "Verification failed" }, { status: 403 });
         }
 
+        // Validate form data
         const { firstName, lastName, email, message } = contactFormSchema.parse(body);
 
+        const { success: emailAllowed } = await emailRateLimit.limit(email);
+        if (!emailAllowed) {
+            return NextResponse.json({ error: "Too many requests" }, { status: 429 });
+        }
+
+        // Send email using Resend
         const { error } = await resend.emails.send({
             from: "onboarding@resend.dev",
-            to: process.env.CONTACT_EMAIL!,
+            to: env.CONTACT_EMAIL,
             replyTo: email,
             subject: `New message from ${firstName} ${lastName}`,
             react: EmailTemplate({ firstName, lastName, email, message }),
@@ -51,7 +63,13 @@ export async function POST(request: Request) {
 
         return NextResponse.json({ success: true }, { status: 200 });
         
-    } catch {
-        return NextResponse.json({ error: "Invalid request" }, { status: 400 });
+    } catch (error) {
+        if (error instanceof ZodError) {
+            return NextResponse.json(
+                { error: "Validation failed", fields: error.flatten().fieldErrors },
+                { status: 400 }
+            );
+        }
+        return NextResponse.json({ error: "Internal server error" }, { status: 500 });
     }
 }
