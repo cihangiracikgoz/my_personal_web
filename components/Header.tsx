@@ -1,19 +1,17 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useTheme } from "next-themes";
 import { FiMoon, FiSun } from "react-icons/fi";
 
 export default function Header() {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const { resolvedTheme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => setMounted(true), []);
 
   function toggleDarkMode() {
-    const newMode = !isDarkMode;
-    setIsDarkMode(newMode);
-    if (newMode) {
-      document.documentElement.setAttribute("data-theme", "dark");
-    } else {
-      document.documentElement.removeAttribute("data-theme");
-    }
+    setTheme(resolvedTheme === "dark" ? "light" : "dark");
   }
 
   function scrollTo(id: string) {
@@ -53,9 +51,9 @@ export default function Header() {
       <button
         className="bg-transparent border-none text-[var(--foreground)] text-[22px] cursor-pointer flex items-center p-2"
         onClick={toggleDarkMode}
-        aria-label={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
+        aria-label={mounted && resolvedTheme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
       >
-        {isDarkMode ? <FiSun /> : <FiMoon />}
+        {mounted ? (resolvedTheme === "dark" ? <FiSun /> : <FiMoon />) : <FiMoon />}
       </button>
     </header>
   );

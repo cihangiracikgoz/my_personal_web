@@ -10,6 +10,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { contactFormSchema } from '@/lib/validations';
+import { env } from '@/lib/env';
 
 type ContactForm = z.infer<typeof contactFormSchema>;
 
@@ -24,7 +25,6 @@ export default function Contact() {
   async function onSubmit(data: ContactForm) {
     if (!turnstileToken) {
       setStatus('failure');
-      console.error('Turnstile not initialized');
       return;
     }
     
@@ -43,9 +43,10 @@ export default function Contact() {
       setStatus('success');
       reset();
       turnstileRef.current?.reset();
-    } catch (err) {
+    } catch {
       setStatus('failure');
-      console.error(err instanceof Error ? err.message : 'Unknown error');
+      setTurnstileToken(null);
+      turnstileRef.current?.reset();
     }
   }
 
@@ -62,21 +63,16 @@ export default function Contact() {
           <p className="text-[15px] text-muted-foreground mt-3 max-w-[250px] leading-relaxed">
             Got any questions? Drop me a message and I'll get back to you as soon as possible!
           </p>
-          {status === 'success' && (
-            <p className="text-sm text-green-600 mt-4">Message sent successfully!</p>
-          )}
-          {status === 'failure' && (
-            <p className="text-sm text-red-500 mt-4">Something went wrong. Please try again.</p>
-          )}
         </div>
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6 w-full max-w-[450px]">
           <input type="text" name="website" className="hidden" tabIndex={-1} autoComplete="off" /> 
           <div className="flex gap-4">
             <div className="flex flex-col gap-1.5 flex-1 min-w-0">
-              <Label className="text-[13px]">
+              <Label htmlFor="firstName" className="text-[13px]">
                 First name
               </Label>
               <Input
+                id="firstName"
                 type="text"
                 {...register('firstName')}
                 placeholder="First name"
@@ -85,10 +81,11 @@ export default function Contact() {
               {errors.firstName && <p className="text-xs text-red-500">{errors.firstName.message}</p>}
             </div>
             <div className="flex flex-col gap-1.5 flex-1 min-w-0">
-              <Label className="text-[13px]">
+              <Label htmlFor="lastName" className="text-[13px]">
                 Last name
               </Label>
               <Input
+                id="lastName"
                 type="text"
                 {...register('lastName')}
                 placeholder="Last name"
@@ -98,10 +95,11 @@ export default function Contact() {
             </div>
           </div>
           <div className="flex flex-col gap-1.5">
-            <Label className="text-[13px]">
+            <Label htmlFor="email" className="text-[13px]">
               Email
             </Label>
             <Input
+              id="email"
               type="email"
               {...register('email')}
               placeholder="you@example.com"
@@ -110,10 +108,11 @@ export default function Contact() {
             {errors.email && <p className="text-xs text-red-500">{errors.email.message}</p>}
           </div>
           <div className="flex flex-col gap-1.5">
-            <Label className="text-[13px]">
+            <Label htmlFor="message" className="text-[13px]">
               Message
             </Label>
             <Textarea
+              id="message"
               {...register('message')}
               placeholder="Leave a message..."
               rows={5}
@@ -123,17 +122,36 @@ export default function Contact() {
           </div>
           <Turnstile
             ref={turnstileRef}
-            siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!}
+            siteKey={env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
             onSuccess={setTurnstileToken}
+            onExpire={() => {
+              setTurnstileToken(null);
+              turnstileRef.current?.reset();
+            }}
+            options={{
+              size: 'flexible',
+              appearance: 'interaction-only',
+            }}
           />
-          <Button
-            type="submit"
-            disabled={status === 'loading' || !turnstileToken}
-            size="lg"
-            className="self-start px-8"
-          >
-            {status === 'loading' ? 'Sending...' : 'Submit'}
-          </Button>
+          <div className="flex items-center gap-4">
+            <Button
+              type="submit"
+              disabled={status === 'loading' || !turnstileToken}
+              size="lg"
+              className="px-8 shrink-0"
+            >
+              {status === 'loading' ? 'Sending...' : 'Submit'}
+            </Button>
+            <p className="text-[10px] text-muted-foreground leading-snug">
+              Your personal information is processed solely to respond to your inquiry and is not stored, retained, or disclosed to third parties.
+            </p>
+          </div>
+          {status === 'success' && (
+            <p className="text-sm text-green-600">Message sent successfully!</p>
+          )}
+          {status === 'failure' && (
+            <p className="text-sm text-red-500">Something went wrong. Please try again.</p>
+          )}
         </form>
       </div>
     </section>
