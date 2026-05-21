@@ -7,7 +7,7 @@ import {
   Text,
   Hr,
   Section,
-} from "@react-email/components";
+} from "react-email";
 
 interface EmailTemplateProps {
   firstName: string;
