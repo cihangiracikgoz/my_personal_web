@@ -22,7 +22,8 @@ export async function POST(request: Request) {
         }
 
         // Rate limiting
-        const ip = request.headers.get("x-forwarded-for") ?? request.headers.get("CF-Connecting-IP") ?? "unknown";
+        const forwarded = request.headers.get("x-forwarded-for");
+        const ip = forwarded ? forwarded.split(",")[0].trim() : "unknown";
         const { success } = await ipRateLimit.limit(ip);
         if (!success) {
             return NextResponse.json({ error: "Too many requests" }, { status: 429 });
