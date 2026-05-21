@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
 import { FiMoon, FiSun } from "react-icons/fi";
+import { navItems } from "@/lib/site";
 
 export default function Header() {
   const { resolvedTheme, setTheme } = useTheme();
@@ -23,30 +24,15 @@ export default function Header() {
   return (
     <header className="flex justify-between items-center py-5 px-[100px]">
       <nav className="flex items-center gap-[50px]">
-        <button
-          className="text-lg font-normal text-[var(--foreground)] hover:text-[var(--accent)] cursor-pointer bg-transparent border-none"
-          onClick={scrollTo("about")}
-        >
-          About Me
-        </button>
-        <button
-          className="text-lg font-normal text-[var(--foreground)] hover:text-[var(--accent)] cursor-pointer bg-transparent border-none"
-          onClick={scrollTo("journey")}
-        >
-          Journey
-        </button>
-        <button
-          className="text-lg font-normal text-[var(--foreground)] hover:text-[var(--accent)] cursor-pointer bg-transparent border-none"
-          onClick={scrollTo("projects")}
-        >
-          Projects
-        </button>
-        <button
-          className="text-lg font-normal text-[var(--foreground)] hover:text-[var(--accent)] cursor-pointer bg-transparent border-none"
-          onClick={scrollTo("contact")}
-        >
-          Contact Me
-        </button>
+        {navItems.map((item) => (
+          <button
+            key={item.id}
+            className="text-lg font-normal text-[var(--foreground)] hover:text-[var(--accent)] cursor-pointer bg-transparent border-none"
+            onClick={scrollTo(item.id)}
+          >
+            {item.label}
+          </button>
+        ))}
       </nav>
       <button
         className="bg-transparent border-none text-[var(--foreground)] text-[22px] cursor-pointer flex items-center p-2"

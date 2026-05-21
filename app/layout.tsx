@@ -2,29 +2,27 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import ThemeProvider from "@/components/ThemeProvider";
 import { env } from "@/lib/env";
+import { siteConfig } from "@/lib/site";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   metadataBase: new URL(env.NEXT_PUBLIC_BASE_URL),
-  title: "Cihangir Acikgoz",
-  description:
-    "Personal portfolio of Cihangir Acikgoz",
+  title: siteConfig.name,
+  description: siteConfig.description,
   openGraph: {
-    title: "Cihangir Acikgoz",
-    description:
-      "Personal portfolio of Cihangir Acikgoz",
+    title: siteConfig.name,
+    description: siteConfig.description,
     url: env.NEXT_PUBLIC_BASE_URL,
-    siteName: "Cihangir Acikgoz",
-    locale: "en_GB",
+    siteName: siteConfig.name,
+    locale: siteConfig.locale,
     type: "website",
   },
   twitter: {
     card: "summary",
-    title: "Cihangir Acikgoz",
-    description:
-      "Personal portfolio of Cihangir Acikgoz",
+    title: siteConfig.name,
+    description: siteConfig.description,
   },
   robots: {
     index: true,

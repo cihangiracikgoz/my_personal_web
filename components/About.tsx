@@ -1,7 +1,8 @@
-import { FiGithub, FiLinkedin, FiInstagram } from "react-icons/fi";
-import { BiCoffeeTogo } from "react-icons/bi";
+import { siteConfig, socialLinks } from "@/lib/site";
 
 export default function About() {
+  const [firstName, lastName] = siteConfig.name.split(" ");
+
   return (
     <section
       id="about"
@@ -12,51 +13,27 @@ export default function About() {
       </div>
       <div className="flex flex-col items-start">
         <h1 className="text-[70px] font-normal text-[var(--foreground)] tracking-[-4px] leading-[1.0]">
-          Cihangir
+          {firstName}
           <br />
-          Acikgoz
+          {lastName}
         </h1>
         <p className="text-[25px] text-[var(--foreground)] mt-5 tracking-[-1px]">
           BSc Computer Science
           <br />@ University of Surrey
         </p>
         <div className="flex gap-[30px] mt-5">
-          <a
-            href="https://www.instagram.com/cihangiracikgoz"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Instagram"
-            className="text-[var(--foreground)] text-[40px] transition-colors duration-300 hover:text-[var(--accent)]"
-          >
-            <FiInstagram />
-          </a>
-          <a
-            href="https://www.linkedin.com/in/cihangiracikgoz/"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="LinkedIn"
-            className="text-[var(--foreground)] text-[40px] transition-colors duration-300 hover:text-[var(--accent)]"
-          >
-            <FiLinkedin />
-          </a>
-          <a
-            href="https://github.com/cihangiracikgoz"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="GitHub"
-            className="text-[var(--foreground)] text-[40px] transition-colors duration-300 hover:text-[var(--accent)]"
-          >
-            <FiGithub />
-          </a>
-          <a
-            href="https://buymeacoffee.com/cihangiracikgoz"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Buy Me a Coffee"
-            className="text-[var(--foreground)] text-[40px] transition-colors duration-300 hover:text-[var(--accent)]"
-          >
-            <BiCoffeeTogo />
-          </a>
+          {socialLinks.map((link) => (
+            <a
+              key={link.label}
+              href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={link.label}
+              className="text-[var(--foreground)] text-[40px] transition-colors duration-300 hover:text-[var(--accent)]"
+            >
+              <link.icon />
+            </a>
+          ))}
         </div>
       </div>
     </section>
