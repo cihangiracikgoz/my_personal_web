@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { siteConfig, socialLinks } from "@/lib/site";
 
 export default function About() {
@@ -8,9 +9,14 @@ export default function About() {
       id="about"
       className="flex items-start justify-center gap-[60px] py-20 px-[100px] min-h-screen"
     >
-      <div>
-        <div className="w-[400px] h-[500px] bg-[var(--accent)] opacity-30" />
-      </div>
+      <Image
+        src="/profile-picture-compressed.jpg"
+        alt={siteConfig.name}
+        width={400}
+        height={500}
+        priority
+        className="w-[400px] h-[550px] object-cover"
+      />
       <div className="flex flex-col items-start">
         <h1 className="text-[70px] font-normal text-[var(--foreground)] tracking-[-4px] leading-[1.0]">
           {firstName}
