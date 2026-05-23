@@ -42,6 +42,7 @@ export default function Contact() {
       }
       setStatus('success');
       reset();
+      setTurnstileToken(null);
       turnstileRef.current?.reset();
     } catch {
       setStatus('failure');
@@ -146,12 +147,14 @@ export default function Contact() {
               Your personal information is processed solely to respond to your inquiry and is not stored, retained, or disclosed to third parties.
             </p>
           </div>
-          {status === 'success' && (
-            <p className="text-sm text-green-600">Message sent successfully!</p>
-          )}
-          {status === 'failure' && (
-            <p className="text-sm text-red-500">Something went wrong. Please try again.</p>
-          )}
+          <div aria-live="polite">
+            {status === 'success' && (
+              <p className="text-sm text-green-600">Message sent successfully!</p>
+            )}
+            {status === 'failure' && (
+              <p className="text-sm text-red-500">Something went wrong. Please try again.</p>
+            )}
+          </div>
         </form>
       </div>
     </section>

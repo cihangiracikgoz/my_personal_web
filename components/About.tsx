@@ -10,7 +10,7 @@ export default function About() {
       className="flex flex-col md:flex-row items-center md:items-start justify-center gap-10 md:gap-[60px] py-12 md:py-20 px-6 md:px-[100px] min-h-screen"
     >
       <Image
-        src="/profile-picture-compressed.jpg"
+        src="/profile-picture-portfolio.webp"
         alt={siteConfig.name}
         width={400}
         height={500}

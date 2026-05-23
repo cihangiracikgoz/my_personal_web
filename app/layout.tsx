@@ -24,6 +24,9 @@ export const metadata: Metadata = {
     title: siteConfig.name,
     description: siteConfig.description,
   },
+  other: {
+    "apple-mobile-web-app-title": "Cihangir Acikgoz",
+  },
   robots: {
     index: true,
     follow: true,

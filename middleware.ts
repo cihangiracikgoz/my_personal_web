@@ -6,12 +6,13 @@ export function middleware(request: NextRequest) {
 
   const csp = [
     `default-src 'self'`,
-    `script-src 'self' 'nonce-${nonce}' 'strict-dynamic'`,
+    `script-src 'self' 'nonce-${nonce}' 'strict-dynamic' https://browser.sentry-cdn.com`,
     `style-src 'self' 'unsafe-inline'`,
     `frame-src https://challenges.cloudflare.com`,
-    `connect-src 'self'`,
+    `connect-src 'self' https://*.ingest.de.sentry.io`,
     `img-src 'self' data:`,
     `font-src 'self'`,
+    `worker-src 'self' blob:`,
     `object-src 'none'`,
     `base-uri 'self'`,
     `form-action 'self'`,
