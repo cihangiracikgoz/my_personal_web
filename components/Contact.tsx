@@ -53,14 +53,14 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="flex items-center justify-center py-20 px-[100px] min-h-screen"
+      className="flex items-center justify-center py-12 md:py-20 px-6 md:px-[100px] min-h-screen"
     >
-      <div className="flex flex-row justify-center items-start gap-[100px] w-full max-w-[900px]">
-        <div className="flex flex-col items-start pt-2 shrink-0">
-          <h2 className="text-[30px] font-semibold">
+      <div className="flex flex-col md:flex-row justify-center items-center md:items-start gap-10 md:gap-[100px] w-full max-w-[900px]">
+        <div className="flex flex-col items-center md:items-start pt-2 shrink-0">
+          <h2 className="text-2xl md:text-[30px] font-semibold text-center md:text-left">
             Let's keep in touch
           </h2>
-          <p className="text-[15px] text-muted-foreground mt-3 max-w-[250px] leading-relaxed">
+          <p className="text-sm md:text-[15px] text-muted-foreground mt-3 max-w-[250px] leading-relaxed text-center md:text-left">
             Got any questions? Drop me a message and I'll get back to you as soon as possible!
           </p>
         </div>

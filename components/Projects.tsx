@@ -25,12 +25,12 @@ export default function Projects() {
   return (
     <section
       id="projects"
-      className="flex flex-row justify-center items-center py-20 px-[100px] gap-[100px] min-h-screen text-[var(--foreground)]"
+      className="flex flex-col md:flex-row justify-center items-center py-12 md:py-20 px-6 md:px-[100px] gap-10 md:gap-[100px] min-h-screen text-[var(--foreground)]"
     >
       <div className="flex justify-center items-center">
-        <h2 className="text-[30px] font-medium whitespace-nowrap">Projects</h2>
+        <h2 className="text-2xl md:text-[30px] font-medium whitespace-nowrap">Projects</h2>
       </div>
-      <div className="flex flex-col gap-4 self-center max-w-[550px]">
+      <div className="flex flex-col gap-4 self-center max-w-[550px] w-full">
         {projects.map((project) => (
           <div
             key={project.title}
@@ -38,8 +38,8 @@ export default function Projects() {
           >
             <div className="w-[3px] bg-[var(--accent)] shrink-0" />
             <div className="px-5 py-4">
-              <h3 className="text-[15px] font-semibold">{project.title}</h3>
-              <p className="text-[13px] mt-1.5 leading-snug text-[var(--muted-foreground)]">
+              <h3 className="text-sm md:text-[15px] font-semibold">{project.title}</h3>
+              <p className="text-xs md:text-[13px] mt-1.5 leading-snug text-[var(--muted-foreground)]">
                 {project.description}
               </p>
             </div>
