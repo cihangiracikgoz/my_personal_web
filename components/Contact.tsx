@@ -65,7 +65,7 @@ export default function Contact() {
           </p>
         </div>
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6 w-full max-w-[450px]">
-          <input type="text" name="website" className="hidden" tabIndex={-1} autoComplete="off" /> 
+          <input type="text" className="hidden" tabIndex={-1} autoComplete="off" aria-hidden="true" {...register('website' as never)} /> 
           <div className="flex gap-4">
             <div className="flex flex-col gap-1.5 flex-1 min-w-0">
               <Label htmlFor="firstName" className="text-[13px]">

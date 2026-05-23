@@ -13,4 +13,4 @@ export const emailRateLimit = new Ratelimit({
     redis,
     limiter: Ratelimit.slidingWindow(2, "1 h"),
     prefix: "ratelimit:email",
-})
+});

@@ -31,9 +31,9 @@ export default function Projects() {
         <h2 className="text-[30px] font-medium whitespace-nowrap">Projects</h2>
       </div>
       <div className="flex flex-col gap-4 self-center max-w-[550px]">
-        {projects.map((project, index) => (
+        {projects.map((project) => (
           <div
-            key={index}
+            key={project.title}
             className="flex flex-row rounded-lg overflow-hidden bg-[var(--muted)] hover:-translate-y-1 hover:shadow-lg transition-all duration-300"
           >
             <div className="w-[3px] bg-[var(--accent)] shrink-0" />
