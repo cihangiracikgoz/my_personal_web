@@ -51,7 +51,7 @@ export async function POST(request: Request) {
 
         // Send email using Resend
         const { error } = await resend.emails.send({
-            from: "onboarding@resend.dev",
+            from: "Cihangir Acikgoz <noreply@cihangiracikgoz.dev>",
             to: env.CONTACT_EMAIL,
             replyTo: email,
             subject: `New message from ${firstName} ${lastName}`,
