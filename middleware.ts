@@ -17,8 +17,6 @@ export function middleware(request: NextRequest) {
     `base-uri 'self'`,
     `form-action 'self'`,
     `frame-ancestors 'none'`,
-    `report-uri /api/csp-report`,
-    `report-to csp-endpoint`,
     `upgrade-insecure-requests`,
   ].join("; ");
 
@@ -31,7 +29,6 @@ export function middleware(request: NextRequest) {
   });
 
   response.headers.set("Content-Security-Policy-Report-Only", csp);
-  response.headers.set("Reporting-Endpoints", `csp-endpoint="/api/csp-report"`);
 
   return response;
 }
