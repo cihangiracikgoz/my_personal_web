@@ -15,7 +15,9 @@ export default function About() {
         width={400}
         height={500}
         priority
-        className="w-[280px] h-[380px] md:w-[400px] md:h-[550px] object-cover"
+        sizes="(max-width: 768px) 280px, 400px"
+        style={{ width: "auto", height: "auto" }}
+        className="object-cover"
       />
       <div className="flex flex-col items-center md:items-start">
         <h1 className="text-5xl md:text-[70px] font-normal text-[var(--foreground)] tracking-[-4px] leading-[1.0] text-center md:text-left">

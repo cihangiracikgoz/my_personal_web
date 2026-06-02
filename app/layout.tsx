@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { headers } from "next/headers";
 import ThemeProvider from "@/components/ThemeProvider";
 import { env } from "@/lib/env";
 import { siteConfig } from "@/lib/site";
@@ -36,11 +37,13 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const nonce = (await headers()).get("x-nonce") || "";
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.className} min-h-screen text-[var(--foreground)]`}>
@@ -50,7 +53,7 @@ export default function RootLayout({
         >
           Skip to main content
         </a>
-        <ThemeProvider>
+        <ThemeProvider nonce={nonce}>
           {children}
         </ThemeProvider>
       </body>
