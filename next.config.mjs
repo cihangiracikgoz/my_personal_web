@@ -3,11 +3,6 @@ import { withSentryConfig } from "@sentry/nextjs";
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   poweredByHeader: false,
-  experimental: {
-    sri: {
-      algorithm: "sha384",
-    },
-  },
   async headers() {
     return [
       {
