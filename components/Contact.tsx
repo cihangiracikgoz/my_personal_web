@@ -17,6 +17,7 @@ type ContactForm = z.infer<typeof contactFormSchema>;
 export default function Contact() {
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'failure'>('idle');
   const turnstileRef = useRef<TurnstileInstance>(null);
+  const honeypotRef = useRef<HTMLInputElement>(null);
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
   const { register, handleSubmit, reset, formState: { errors } } = useForm<ContactForm>({
     resolver: zodResolver(contactFormSchema)
@@ -33,7 +34,7 @@ export default function Contact() {
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...data, turnstileToken }),
+        body: JSON.stringify({ ...data, turnstileToken, website: honeypotRef.current?.value }),
       });
 
       if (!res.ok) {
@@ -66,7 +67,7 @@ export default function Contact() {
           </p>
         </div>
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6 w-full max-w-[450px]">
-          <input type="text" className="hidden" tabIndex={-1} autoComplete="off" aria-hidden="true" {...register('website' as never)} /> 
+          <input type="text" className="hidden" tabIndex={-1} autoComplete="off" aria-hidden="true" ref={honeypotRef} name="website" /> 
           <div className="flex gap-4">
             <div className="flex flex-col gap-1.5 flex-1 min-w-0">
               <Label htmlFor="firstName" className="text-[13px]">

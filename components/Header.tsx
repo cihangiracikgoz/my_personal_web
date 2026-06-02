@@ -51,17 +51,24 @@ export default function Header() {
         {mounted ? (resolvedTheme === "dark" ? <FiSun /> : <FiMoon />) : <FiMoon />}
       </button>
       {menuOpen && (
-        <nav className="absolute top-16 left-0 right-0 flex flex-col items-center gap-6 py-8 [background:var(--bg-gradient,var(--background))] border-b border-[var(--border)] z-50 md:hidden">
-          {navItems.map((item) => (
-            <button
-              key={item.id}
-              className="text-lg font-normal text-[var(--foreground)] hover:text-[var(--accent)] cursor-pointer bg-transparent border-none min-h-[48px] min-w-[48px]"
-              onClick={scrollTo(item.id)}
-            >
-              {item.label}
-            </button>
-          ))}
-        </nav>
+        <>
+          <div 
+            className='fixed inset-0 z-40 md:hidden cursor-pointer' 
+            onClick={() => setMenuOpen(false)} 
+            aria-hidden="true" 
+          />
+          <nav className="absolute top-16 left-0 right-0 flex flex-col items-center gap-6 py-8 [background:var(--bg-gradient,var(--background))] border-b border-[var(--border)] z-50 md:hidden">
+            {navItems.map((item) => (
+              <button
+                key={item.id}
+                className="text-lg font-normal text-[var(--foreground)] hover:text-[var(--accent)] cursor-pointer bg-transparent border-none min-h-[48px] min-w-[48px]"
+                onClick={scrollTo(item.id)}
+              >
+                {item.label}
+              </button>
+            ))}
+          </nav>
+        </>
       )}
     </header>
   );
