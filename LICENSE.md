@@ -1,4 +1,4 @@
-Copyright (c) Cihangir Acikgoz. All rights reserved.
+Copyright © Cihangir Acikgoz. All rights reserved.
 
 This website, its design, source code, content, and assets are the sole property of Cihangir Acikgoz.
 
