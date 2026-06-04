@@ -1,13 +1,13 @@
 const projects = [
   {
+    title: "QBot",
+    description:
+      "A gamified classroom quiz platform built in a team of 6. Developed the React frontend with role-based dashboards, a levelled progression map, and live quiz sessions over WebSockets. Supports multiple question formats with text-to-speech and rewards to keep young learners engaged.",
+  },
+  {
     title: "Morse Decoder using Raspberry Pi",
     description:
       "My team and I turned a Raspberry Pi into a Morse code decoder. You tap a button and it figures out your dots and dashes, showing letters on a 7-segment display with buzzer and LED feedback. A fun dive into embedded C, GPIO, and digital logic.",
-  },
-  {
-    title: "Dottify",
-    description:
-      "A music-streaming platform where artists upload tracks & customers build playlists & leave ratings and admins keep it all running. Built with Django, RESTful API, and role-based auth to keep everyone in their lane.",
   },
   {
     title: "Masked Warrior",
