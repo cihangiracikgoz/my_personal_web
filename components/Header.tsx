@@ -1,16 +1,16 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useSyncExternalStore } from "react";
 import { useTheme } from "next-themes";
 import { FiMoon, FiSun, FiMenu, FiX } from "react-icons/fi";
 import { navItems } from "@/lib/site";
 
+const emptySubscribe = () => () => {};
+
 export default function Header() {
   const { resolvedTheme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-
-  useEffect(() => setMounted(true), []);
+  const mounted = useSyncExternalStore(emptySubscribe, () => true, () => false);
 
   function toggleDarkMode() {
     setTheme(resolvedTheme === "dark" ? "light" : "dark");
