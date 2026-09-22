@@ -7,10 +7,10 @@ export function proxy(request: NextRequest) {
 
   const csp = [
     `default-src 'self'`,
-    `script-src 'self' 'nonce-${nonce}' 'strict-dynamic'${isDev ? " 'unsafe-eval'" : ""} https://browser.sentry-cdn.com`,
+    `script-src 'self' 'nonce-${nonce}' 'strict-dynamic'${isDev ? " 'unsafe-eval'" : ""} https://browser.sentry-cdn.com https://challenges.cloudflare.com`,
     `style-src 'self' 'unsafe-inline'`,
     `frame-src https://challenges.cloudflare.com`,
-    `connect-src 'self' https://*.ingest.de.sentry.io`,
+    `connect-src 'self' https://*.ingest.de.sentry.io https://challenges.cloudflare.com`,
     `img-src 'self' data:`,
     `font-src 'self'`,
     `worker-src 'self' blob:`,

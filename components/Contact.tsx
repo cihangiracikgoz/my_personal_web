@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, type FormEvent } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -10,7 +10,6 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { contactFormSchema } from '@/lib/validations';
-import { env } from '@/lib/env';
 
 type ContactForm = z.infer<typeof contactFormSchema>;
 
@@ -51,6 +50,10 @@ export default function Contact() {
     }
   }
 
+  function handleFormSubmit(event: FormEvent<HTMLFormElement>) {
+    void handleSubmit(onSubmit)(event);
+  }
+
   return (
     <section
       id="contact"
@@ -65,7 +68,7 @@ export default function Contact() {
             Got any questions? Drop me a message and I&apos;ll get back to you as soon as possible!
           </p>
         </div>
-        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6 w-full max-w-[450px]">
+        <form onSubmit={handleFormSubmit} className="flex flex-col gap-6 w-full max-w-[450px]">
           <input type="text" className="hidden" tabIndex={-1} autoComplete="off" aria-hidden="true" {...register('website')} />
           <div className="flex gap-4">
             <div className="flex flex-col gap-1.5 flex-1 min-w-0">
@@ -123,7 +126,7 @@ export default function Contact() {
           </div>
           <Turnstile
             ref={turnstileRef}
-            siteKey={env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
+            siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!}
             onSuccess={setTurnstileToken}
             onExpire={() => {
               setTurnstileToken(null);
@@ -144,7 +147,7 @@ export default function Contact() {
               {status === 'loading' ? 'Sending...' : 'Submit'}
             </Button>
             <p className="text-[10px] text-muted-foreground leading-snug">
-              Your personal information is processed solely to respond to your inquiry and is not stored, retained, or disclosed to third parties.
+              Your information is used to respond to your inquiry and processed by other third-party services.
             </p>
           </div>
           <div aria-live="polite">
