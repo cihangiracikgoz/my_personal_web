@@ -4,3 +4,6 @@ allowBuilds:
   msw: true
   sharp: false
   unrs-resolver: true
+overrides:
+  '@types/react': 19.2.16
+  '@types/react-dom': 19.2.3

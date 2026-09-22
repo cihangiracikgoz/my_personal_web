@@ -9,28 +9,30 @@ import { env } from "@/lib/env";
 
 const resend = new Resend(env.RESEND_API_KEY);
 
-const allowedOrigins = new Set([
-    env.NEXT_PUBLIC_BASE_URL,
-]);
+const allowedOrigin = new URL(env.NEXT_PUBLIC_BASE_URL).origin;
 
 export async function POST(request: Request) {
     try {
         // CORS check
         const origin = request.headers.get("origin");
-        if (!origin || !allowedOrigins.has(origin)) {
+        if (!origin || origin !== allowedOrigin) {
             return NextResponse.json({ error: "Origin not allowed" }, { status: 403 });
         }
 
         // Rate limiting
-        const forwarded = request.headers.get("x-forwarded-for");
-        const ip = forwarded ? forwarded.split(",")[0].trim() : "unknown";
+        const ip = request.headers.get("x-real-ip")?.trim()
+            || request.headers.get("x-forwarded-for")?.split(",")[0]?.trim()
+            || "unknown";
         const { success } = await ipRateLimit.limit(ip);
         if (!success) {
             return NextResponse.json({ error: "Too many requests" }, { status: 429 });
         }
         
         // Honeypot check
-        const body = await request.json();
+        const body = await request.json().catch(() => null);
+        if (!body || typeof body !== "object" || Array.isArray(body)) {
+            return NextResponse.json({ error: "Invalid request body" }, { status: 400 });
+        }
         if (body.website) {
             return NextResponse.json({ success: true });
         }
@@ -44,7 +46,8 @@ export async function POST(request: Request) {
         // Validate form data
         const { firstName, lastName, email, message } = contactFormSchema.parse(body);
 
-        const { success: emailAllowed } = await emailRateLimit.limit(email);
+        const normalizedEmail = email.trim().toLowerCase();
+        const { success: emailAllowed } = await emailRateLimit.limit(normalizedEmail);
         if (!emailAllowed) {
             return NextResponse.json({ error: "Too many requests" }, { status: 429 });
         }
